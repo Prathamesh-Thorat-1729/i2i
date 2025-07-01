@@ -1,7 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:i2i/components/objects/questions.dart';
 import 'package:i2i/components/quiz_pages.dart';
-import 'dart:math';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const List<String> emotionOptions = [
@@ -11,7 +12,7 @@ const List<String> emotionOptions = [
   'Fear',
   'Surprise',
   'Disgust',
-  'Normal',
+  'Neutral',
 ];
 
 const emotionMap = {
@@ -21,7 +22,7 @@ const emotionMap = {
   'F': 'Fear',
   'P': 'Surprise',
   'D': 'Disgust',
-  'N': 'Normal',
+  'N': 'Neutral',
 };
 
 const emotionDescriptions = {
@@ -32,8 +33,8 @@ const emotionDescriptions = {
   'Fear': 'Wide eyes and tense body language often signal fear.',
   'Surprise': 'Raised eyebrows and open mouth often suggest surprise.',
   'Disgust': 'A wrinkled nose and raised upper lip are signs of disgust.',
-  'Normal':
-      'A relaxed expression with neutral features indicates a normal state.',
+  'Neutral':
+      'A relaxed expression with neutral features indicates a Neutral state.',
 };
 
 List<String> imageFiles = [
@@ -106,7 +107,7 @@ Future<List<Question>> decideQuestions() async {
         emotionDescriptions[emotion] ?? 'No description available';
 
     return Question(
-      questionString: "What emotion is shown in this image?",
+      questionString: "Identify the emotion?",
       imageId: "assets/BaselineImages/$imageFile",
       correctAnswer: emotion,
       options: decideOptions(emotion, level),

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:i2i/components/common_button.dart';
-import 'package:i2i/database/result.dart';
 import 'package:i2i/database/result_database.dart';
 import 'package:i2i/screens/quiz_screen.dart';
+import 'package:lottie/lottie.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+
 import '../screens/settings_screen.dart'; // Import the settings screen
-import 'package:lottie/lottie.dart';
 
 // final ThemeData lightTheme = ThemeData(
 //   brightness: Brightness.light,
@@ -143,6 +143,7 @@ void runBaseLine(BuildContext context) {
 }
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   final databaseDir = await getApplicationSupportDirectory();
   databaseDir.create(recursive: true);
   final path = join(databaseDir.path, 'baseline_results.db');
