@@ -19,7 +19,7 @@ class CommonButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textStyle = TextStyle(
-      fontSize: 25.0,
+      fontSize: 15.0,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.5,
       color: Colors.white,
@@ -38,15 +38,15 @@ class CommonButton extends StatelessWidget {
                     width: 1,
                   ),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
-                  padding: EdgeInsets.symmetric(vertical: 12, horizontal: 50),
+                  padding: EdgeInsets.symmetric(vertical: 0, horizontal: 50),
                 ),
                 child: Text(text, style: textStyle),
               )
               : Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.0),
+                  borderRadius: BorderRadius.circular(8.0),
                   boxShadow: [
                     // Bottom shadow
                     BoxShadow(
@@ -69,9 +69,9 @@ class CommonButton extends StatelessWidget {
                     foregroundColor: Colors.white,
                     elevation: 0, // using custom shadows instead
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0),
+                      borderRadius: BorderRadius.circular(6.0),
                     ),
-                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                    padding: EdgeInsets.symmetric(vertical: 0, horizontal: 24),
                   ),
                   child: Text(text, style: textStyle),
                 ),
