@@ -187,7 +187,7 @@ class _QuizPageState extends State<QuizPage> {
             textAlign: TextAlign.center,
           ),
 
-          const SizedBox(height: 16),
+          const SizedBox(height: 1),
 
           // Main content based on screen size
           Expanded(
@@ -206,17 +206,14 @@ class _QuizPageState extends State<QuizPage> {
       children: [
         // Image
         Expanded(
-          flex: 10,
+          flex: 5,
           child: Container(
-            width: double.infinity,
             child: Image(
               image: AssetImage(widget.question.imageId),
               fit: BoxFit.cover,
             ),
           ),
         ),
-
-        const SizedBox(height: 16),
 
         // Options or Answer
         Expanded(
@@ -235,10 +232,10 @@ class _QuizPageState extends State<QuizPage> {
                     itemBuilder: (context, index) {
                       final option = widget.question.options[index];
                       return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        padding: const EdgeInsets.symmetric(vertical: 0),
                         child: Center(
                           child: SizedBox(
-                            width: 200,
+                            width: double.infinity,
                             child: CommonButton(
                               onPressed: () => _answerQuestion(option),
                               text: option,
@@ -311,7 +308,7 @@ class _QuizPageState extends State<QuizPage> {
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: Center(
                             child: SizedBox(
-                              width: 200,
+                              width: 400,
                               child: CommonButton(
                                 onPressed: () => _answerQuestion(option),
                                 text: option,

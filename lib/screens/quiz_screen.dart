@@ -6,23 +6,23 @@ import 'package:i2i/components/quiz_pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const List<String> emotionOptions = [
-  'Anger',
-  'Sad',
-  'Happy',
-  'Fear',
-  'Surprise',
-  'Disgust',
-  'Neutral',
+  'Anger / ग़ुस्सा',
+  'Sad / उदासी',
+  'Happy / ख़ुशी',
+  'Fear / डर',
+  'Surprise / आश्चर्य',
+  'Disgust / घृणा',
+  'Neutral / सामान्य',
 ];
 
 const emotionMap = {
-  'A': 'Anger',
-  'H': 'Happy',
-  'S': 'Sad',
-  'F': 'Fear',
-  'P': 'Surprise',
-  'D': 'Disgust',
-  'N': 'Neutral',
+  'A': 'Anger /  ग़ुस्सा',
+  'H': 'Happy / ख़ुशी',
+  'S': 'Sad / उदासी',
+  'F': 'Fear / डर',
+  'P': 'Surprise / आश्चर्य',
+  'D': 'Disgust / घृणा',
+  'N': 'Neutral / सामान्य',
 };
 
 const emotionDescriptions = {
@@ -107,7 +107,7 @@ Future<List<Question>> decideQuestions() async {
         emotionDescriptions[emotion] ?? 'No description available';
 
     return Question(
-      questionString: "Identify the emotion?",
+      questionString: "Identify the emotion? / भावना पहचानें?",
       imageId: "assets/BaselineImages/$imageFile",
       correctAnswer: emotion,
       options: decideOptions(emotion, level),
@@ -135,7 +135,7 @@ class _QuizScreenState extends State<QuizScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Learn')),
+      appBar: AppBar(title: const Text('Learn / सीखें')),
       body: FutureBuilder<List<Question>>(
         future: _questions,
         builder: (context, snapshot) {
