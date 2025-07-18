@@ -5,9 +5,11 @@ import 'package:i2i/components/objects/questions.dart';
 import 'package:i2i/components/quiz_pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'quiz_results.dart';
+
 const List<String> emotionOptions = [
   'Anger / ग़ुस्सा',
-  'Sad / उदासी',
+  'Sad / दुखी',
   'Happy / ख़ुशी',
   'Fear / डर',
   'Surprise / आश्चर्य',
@@ -18,7 +20,7 @@ const List<String> emotionOptions = [
 const emotionMap = {
   'A': 'Anger /  ग़ुस्सा',
   'H': 'Happy / ख़ुशी',
-  'S': 'Sad / उदासी',
+  'S': 'Sad / दुखी',
   'F': 'Fear / डर',
   'P': 'Surprise / आश्चर्य',
   'D': 'Disgust / घृणा',
@@ -135,7 +137,40 @@ class _QuizScreenState extends State<QuizScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Learn / सीखें')),
+      appBar: AppBar(
+        title: const Text('Learn / सीखें'),
+        actions: [
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 5, 5, 3),
+            child: Padding(
+              padding: EdgeInsets.only(right: 15.0, top: 0.0, bottom: 2.0),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.red,
+                  backgroundColor: Colors.white,
+                ),
+                onPressed: () async {
+                  final questions = await _questions;
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ResultPage(questions: questions),
+                    ),
+                  );
+                },
+                child: Text(
+                  "End Test",
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
       body: FutureBuilder<List<Question>>(
         future: _questions,
         builder: (context, snapshot) {
@@ -144,6 +179,7 @@ class _QuizScreenState extends State<QuizScreen> {
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
+            final questions = snapshot.data!;
             return QuizPages(questions: snapshot.data!);
           } else {
             return const Center(child: Text('No questions available.'));

@@ -19,63 +19,66 @@ class CommonButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textStyle = TextStyle(
-      fontSize: 15.0,
+      fontSize: 16.0,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.5,
       color: Colors.white,
     );
 
-    return SizedBox(
-      width: width,
-      child:
-          isOutlined
-              ? OutlinedButton(
-                onPressed: onPressed,
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  side: BorderSide(
-                    color: Colors.white.withValues(alpha: 0.7),
-                    width: 1,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  padding: EdgeInsets.symmetric(vertical: 0, horizontal: 50),
-                ),
-                child: Text(text, style: textStyle),
-              )
-              : Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  boxShadow: [
-                    // Bottom shadow
-                    BoxShadow(
-                      color: Colors.white.withValues(alpha: .55),
-                      blurRadius: 10,
-                      offset: Offset(0, 6),
-                    ),
-                    // Top shadow
-                    BoxShadow(
-                      color: Colors.white.withValues(alpha: .3),
-                      blurRadius: 10,
-                      offset: Offset(0, -4),
-                    ),
-                  ],
-                ),
-                child: ElevatedButton(
+    return Center(
+      child: SizedBox(
+        width: width,
+        child:
+            isOutlined
+                ? OutlinedButton(
                   onPressed: onPressed,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
+                  style: OutlinedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 8),
                     foregroundColor: Colors.white,
-                    elevation: 0, // using custom shadows instead
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6.0),
+                    side: BorderSide(
+                      color: Colors.white.withValues(alpha: 0.7),
+                      width: 1,
                     ),
-                    padding: EdgeInsets.symmetric(vertical: 0, horizontal: 24),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    // padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                   ),
                   child: Text(text, style: textStyle),
+                )
+                : Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: [
+                      // Bottom shadow
+                      BoxShadow(
+                        color: Colors.white.withValues(alpha: .55),
+                        blurRadius: 10,
+                        offset: Offset(0, 6),
+                      ),
+                      // Top shadow
+                      BoxShadow(
+                        color: Colors.white.withValues(alpha: .3),
+                        blurRadius: 10,
+                        offset: Offset(0, -4),
+                      ),
+                    ],
+                  ),
+                  child: ElevatedButton(
+                    onPressed: onPressed,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      foregroundColor: Colors.white,
+                      elevation: 0, // using custom shadows instead
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6.0),
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                    ),
+                    child: Text(text, style: textStyle),
+                  ),
                 ),
-              ),
+      ),
     );
   }
 }
