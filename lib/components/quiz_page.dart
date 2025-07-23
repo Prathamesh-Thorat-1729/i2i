@@ -187,7 +187,7 @@ class _QuizPageState extends State<QuizPage> {
             textAlign: TextAlign.center,
           ),
 
-          const SizedBox(height: 1),
+          // const SizedBox(height: 1),
 
           // Main content based on screen size
           Expanded(
@@ -268,7 +268,7 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   Widget _buildDesktopLayout(TextTheme textTheme) {
-    return Row(
+    return Column(
       children: [
         // Left: Image
         Expanded(
@@ -278,67 +278,116 @@ class _QuizPageState extends State<QuizPage> {
             height: double.infinity,
             child: Image(
               image: AssetImage(widget.question.imageId),
-              fit: BoxFit.cover,
+              fit: BoxFit.fitHeight,
             ),
           ),
         ),
 
-        const SizedBox(width: 16),
+        const SizedBox(height: 5.0),
 
         // Right: Options
         Expanded(
-          flex: 5,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (widget.question.options.isEmpty)
-                Center(
-                  child: Text(
-                    widget.question.correctAnswer,
-                    style: textTheme.headlineSmall,
-                    textAlign: TextAlign.center,
-                  ),
-                )
-              else
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children:
-                      widget.question.options.map((option) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: Center(
-                            child: SizedBox(
-                              width: 400,
-                              child: CommonButton(
-                                onPressed: () => _answerQuestion(option),
-                                text: option,
-                                isOutlined: true,
-                                textStyle: const TextStyle(fontSize: 20),
+          flex: 1,
+          // child: Column(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     if (widget.question.options.isEmpty)
+          //       Center(
+          //         child: Text(
+          //           widget.question.correctAnswer,
+          //           style: textTheme.headlineSmall,
+          //           textAlign: TextAlign.center,
+          //         ),
+          //       )
+          //     else
+          //       Column(
+          //         mainAxisSize: MainAxisSize.min,
+          //         children:
+          //             widget.question.options.map((option) {
+          //               return Padding(
+          //                 padding: const EdgeInsets.symmetric(vertical: 10),
+          //                 child: Center(
+          //                   child: SizedBox(
+          //                     width: 400,
+          //                     child: CommonButton(
+          //                       onPressed: () => _answerQuestion(option),
+          //                       text: option,
+          //                       isOutlined: true,
+          //                       textStyle: const TextStyle(fontSize: 20),
+          //                     ),
+          //                   ),
+          //                 ),
+          //               );
+          //             }).toList(),
+          //       ),
+
+          //     if (widget.question.options.isNotEmpty)
+          //       const SizedBox(height: 16),
+
+          //     // if (widget.question.options.isNotEmpty)
+          //     //   Center(
+          //     //     child: SizedBox(
+          //     //       width: 200,
+          //     //       child: CommonButton(
+          //     //         onPressed: () {
+          //     //           _stopTiming();
+          //     //           widget.onNext();
+          //     //         },
+          //     //         text: 'Skip',
+          //     //       ),
+          //     //     ),
+          //     //   ),
+          //   ],
+          // ),
+          child:
+              widget.question.options.isEmpty
+                  ? Center(
+                    child: Text(
+                      widget.question.correctAnswer,
+                      style: textTheme.headlineSmall,
+                      textAlign: TextAlign.center,
+                    ),
+                  )
+                  : Center(
+                    child: SizedBox(
+                      width: 850,
+                      child: Center(
+                        child: GridView.builder(
+                          itemCount: widget.question.options.length,
+
+                          // shrinkWrap: true,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 5,
+                                childAspectRatio: 8.0,
                               ),
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                ),
+                          itemBuilder: (context, index) {
+                            final option = widget.question.options[index];
 
-              if (widget.question.options.isNotEmpty)
-                const SizedBox(height: 16),
-
-              // if (widget.question.options.isNotEmpty)
-              //   Center(
-              //     child: SizedBox(
-              //       width: 200,
-              //       child: CommonButton(
-              //         onPressed: () {
-              //           _stopTiming();
-              //           widget.onNext();
-              //         },
-              //         text: 'Skip',
-              //       ),
-              //     ),
-              //   ),
-            ],
-          ),
+                            if (option == null) {
+                              // Render an empty box to preserve grid structure
+                              return const SizedBox();
+                            }
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 0),
+                              child: Center(
+                                child: SizedBox(
+                                  width: double.infinity,
+                                  child: CommonButton(
+                                    onPressed: () => _answerQuestion(option),
+                                    text: option,
+                                    isOutlined: true,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
         ),
       ],
     );
